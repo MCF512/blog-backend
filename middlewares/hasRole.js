@@ -1,4 +1,3 @@
-const { verify } = require("../helpers/token");
 const User = require("../models/User");
 
 module.exports = function (roles) {

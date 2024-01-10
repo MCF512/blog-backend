@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const cors = require('cors')
 const {register, login, getUsers, getRoles, updateUser, deleteUser} = require('./controllers/user');
 const {getPost, addPost, getPosts, deletePost, editPost} = require('./controllers/post');
 const mapUser = require('./helpers/mapUser');
@@ -13,12 +14,13 @@ const mapPost = require('./helpers/mapPost');
 const mapComment = require('./helpers/mapComment')
 const { addComment, deleteComment } = require('./controllers/comment');
 
-const port = 3001;
+const port = process.env.PORT ||3001;
 const app = express()
 
-app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cors({credentials: true, origin: process.env.CLIENT_URL || `http://localhost:3000` }));
 
-app.use(express.static('../blog/build'))
 app.use(cookieParser())
 
 app.post('/register', async (req, res) => {
