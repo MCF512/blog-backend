@@ -19,7 +19,7 @@ const app = express()
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors({credentials: true, origin: process.env.CLIENT_URL || `http://localhost:3000` }));
+app.use(cors({credentials: true, origin: process.env.CLIENT_URL || `http://localhost:4000` }));
 
 app.use(cookieParser())
 
